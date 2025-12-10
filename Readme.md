@@ -28,7 +28,6 @@
             </li>
         </ul>
     </li>
-    <li>
         <h2>Connect with me:</h2>
             <div style="display:flex;">
                 <a href="https://www.linkedin.com/in/allan-pereira-324748232" style="padding-right:5px;">
@@ -86,5 +85,4 @@
                 <img width="35px" src="https://github.com/CodeByAllan/codebyallan/blob/master/images/macos.svg"/>
             </a>
         </div>
-    </li>
 </ul>
