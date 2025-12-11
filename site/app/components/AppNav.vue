@@ -1,0 +1,16 @@
+<template>
+  <UNavigationMenu color="primary" :items="items" class="w-full" />
+</template>
+<script setup lang="ts">
+import type { NavigationMenuItem } from '@nuxt/ui'
+const items = ref<NavigationMenuItem[][]>([
+  [
+    {
+      label: 'Home',
+      icon: 'i-lucide-home',
+      to: '/',
+      active: true
+    }
+  ]
+])
+</script>
