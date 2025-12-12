@@ -5,7 +5,7 @@
     </template>
     <AppNav />
     <template #right>
-      <UColorModeButton />
+      <UColorModeButton color="primary" />
     </template>
     <template #body>
       <AppNav orientation="vertical" />
