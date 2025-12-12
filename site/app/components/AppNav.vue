@@ -10,7 +10,12 @@ const items = ref<NavigationMenuItem[][]>([
       icon: 'i-lucide-home',
       to: '/',
       active: true
-    }
+    },
+    {
+      label: 'Education',
+      icon: 'i-lucide-graduation-cap',
+      to: '/education'
+    },
   ]
 ])
 </script>
