@@ -7,6 +7,9 @@
     <UContainer>
       <TechKeywords :keywords=keywords />
     </UContainer>
+    <UContainer class="py-12">
+      <ListTech />
+    </UContainer>
   </div>
 </template>
 <script setup lang="ts">
