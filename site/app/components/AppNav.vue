@@ -8,8 +8,7 @@ const items = ref<NavigationMenuItem[][]>([
     {
       label: 'Home',
       icon: 'i-lucide-home',
-      to: '/',
-      active: true
+      to: '/'
     },
     {
       label: 'Education',
