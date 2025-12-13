@@ -13,6 +13,7 @@
       <UFormField label="Message" name="message" required>
         <UTextarea class="w-full" size="xl" autoresize v-model="state.message" :disabled="loading" />
       </UFormField>
+      <div id="hcaptcha-container" class="flex justify-center" />
       <UButton class="font-bold w-min flex justify-center" type="submit" label="Send" :loading="loading"
         :disabled="loading" :leading-icon="!loading ? 'i-lucide:mail' : ''" />
     </UForm>
@@ -21,7 +22,13 @@
 <script setup lang="ts">
 import { z } from "zod";
 import emailjs from "@emailjs/browser";
+declare global {
+  interface Window {
+    hcaptcha: any;
+  }
+}
 const config = useRuntimeConfig().public;
+const hcaptchaSiteKey = config.hcaptchaSiteKey;
 const toast = useToast();
 const schema = z.object({
   name: z.string().min(3, "The name must be at least 3 characters long."),
@@ -42,20 +49,43 @@ const state = reactive({
   message: "",
 });
 const loading = ref(false);
-async function onFormSubmit() {
+const widgetID = ref<string | null>(null);
+onMounted(() => {
+  setTimeout(() => {
+    if (window.hcaptcha) {
+      widgetID.value = window.hcaptcha.render("hcaptcha-container", {
+        sitekey: hcaptchaSiteKey,
+        size: "invisible",
+        callback: onHcaptchaVerified,
+        "expired-callback": onHcaptchaExpired,
+        "error-callback": onHcaptchaError,
+      });
+    }
+  }, 500);
+});
+function onFormSubmit() {
   loading.value = true;
+  if (widgetID.value) {
+    window.hcaptcha.execute(widgetID.value);
+  } else {
+    toast.add({ title: "CAPTCHA not loaded. Please refresh.", color: "error" });
+    loading.value = false;
+  }
+}
+async function onHcaptchaVerified(token: string) {
   const templateParams = {
     name: state.name,
     email: state.email,
     phone: state.phone,
     message: state.message,
+    "h-captcha-response": token,
   };
   try {
     await emailjs.send(
       config.emailjsServiceId,
       config.emailjsTemplateId,
       templateParams,
-      config.emailjsPublicKey
+      config.emailjsPublicKey,
     );
     toast.add({
       title: "Message sent!",
@@ -79,5 +109,20 @@ async function onFormSubmit() {
   } finally {
     loading.value = false;
   }
+}
+function onHcaptchaExpired() {
+  loading.value = false;
+  toast.add({
+    title: "Verification expired. Please try again.",
+    color: "warning",
+  });
+}
+function onHcaptchaError() {
+  loading.value = false;
+  toast.add({
+    title: "Could not verify you are human.",
+    description: "Please try again.",
+    color: "error",
+  });
 }
 </script>
