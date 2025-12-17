@@ -11,9 +11,9 @@ const items = ref<NavigationMenuItem[][]>([
       to: '/'
     },
     {
-      label: 'Education',
+      label: 'Journey',
       icon: 'i-lucide-graduation-cap',
-      to: '/education'
+      to: '/journey'
     },
     {
       label: 'Contact',

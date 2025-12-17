@@ -1,4 +1,4 @@
-export type EducationCardProps = {
+export type JourneyCardProps = {
   institution: string;
   course: string;
   description: string;

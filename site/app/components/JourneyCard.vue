@@ -15,6 +15,6 @@
   </UCard>
 </template>
 <script setup lang="ts">
-import type { EducationCardProps } from '~/types/EducationCardProps';
-defineProps<EducationCardProps>()
+import type { JourneyCardProps } from '~/types/JourneyCardProps';
+defineProps<JourneyCardProps>()
 </script>

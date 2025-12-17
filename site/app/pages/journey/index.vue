@@ -1,15 +1,18 @@
 <template>
+  <h1 class="font-black text-6xl tracking-tight pb-6">
+    Learning Journey
+  </h1>
   <UContainer class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4">
-    <EducationCard v-for="(certificate, index) in certificates" :key="index" :institution="certificate.institution"
+    <JourneyCard v-for="(certificate, index) in certificates" :key="index" :institution="certificate.institution"
       :course="certificate.course" :description="certificate.description" :year_start="certificate.year_start"
       :year_end="certificate.year_end" :progress="certificate.progress"
       :certificate_link="certificate.certificate_link">
-    </EducationCard>
+    </JourneyCard>
   </UContainer>
 </template>
 <script setup lang="ts">
-import type { EducationCardProps } from '~/types/EducationCardProps';
-const certificates: EducationCardProps[] = [
+import type { JourneyCardProps } from '~/types/JourneyCardProps';
+const certificates: JourneyCardProps[] = [
   {
     institution: "University of Salvador",
     course: "Graduation in Software Analysis and Development",
