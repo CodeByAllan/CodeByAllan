@@ -14,12 +14,18 @@ const items = ref<NavigationMenuItem[][]>([
       label: 'Journey',
       icon: 'i-lucide-graduation-cap',
       to: '/journey'
+    }
+    ,
+    {
+      label: 'Projects',
+      icon: 'i-lucide-briefcase',
+      to: '/projects'
     },
     {
       label: 'Contact',
       icon: 'i-lucide-mail',
       to: '/contact'
-    },
+    }
   ]
 ])
 </script>
