@@ -17,11 +17,11 @@ import type { TechCardProps } from '~/types/TechCardProps';
 
 const techItems: Array<TechCardProps> = [
   {
-    "name": "TypeScript",
+    "name": "TS",
     "image": "https://raw.githubusercontent.com/CodeByAllan/CodeByAllan/refs/heads/master/images/typescript.svg"
   },
   {
-    "name": "JavaScript",
+    "name": "JS",
     "image": "https://raw.githubusercontent.com/CodeByAllan/CodeByAllan/refs/heads/master/images/js.svg"
   },
   {
