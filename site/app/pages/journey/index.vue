@@ -1,14 +1,29 @@
 <template>
-  <h1 class="font-black text-6xl tracking-tight pb-6">
-    Learning Journey
-  </h1>
-  <UContainer class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4">
-    <JourneyCard v-for="(certificate, index) in certificates" :key="index" :institution="certificate.institution"
-      :course="certificate.course" :description="certificate.description" :year_start="certificate.year_start"
-      :year_end="certificate.year_end" :progress="certificate.progress"
-      :certificate_link="certificate.certificate_link">
-    </JourneyCard>
-  </UContainer>
+  <div>
+    <h1 v-motion :initial="{ opacity: 0, y: 30 }" :visible-once="{
+      opacity: 1,
+      y: 0,
+      transition: { duration: 800, ease: [0.16, 1, 0.3, 1] }
+    }" class="font-black text-6xl tracking-tight pb-6">
+      Learning Journey
+    </h1>
+
+    <UContainer class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4">
+      <JourneyCard v-for="(certificate, index) in certificates" :key="index" v-motion :initial="{ opacity: 0, y: 20 }"
+        :visible-once="{
+          opacity: 1,
+          y: 0,
+          transition: {
+            delay: index * 80,
+            duration: 500,
+            ease: 'easeOut'
+          }
+        }" :institution="certificate.institution" :course="certificate.course" :description="certificate.description"
+        :year_start="certificate.year_start" :year_end="certificate.year_end" :progress="certificate.progress"
+        :certificate_link="certificate.certificate_link">
+      </JourneyCard>
+    </UContainer>
+  </div>
 </template>
 <script setup lang="ts">
 import type { JourneyCardProps } from '~/types/JourneyCardProps';

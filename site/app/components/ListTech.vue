@@ -1,13 +1,28 @@
 <template>
   <div class="grid grid-cols-1 lg:grid-cols-4 items-center gap-16 w-full">
-    <div class="col-span-4">
+    <div class="col-span-4" v-motion :initial="{ opacity: 0, y: 20 }" :visible-once="{
+      opacity: 1,
+      y: 0,
+      transition: { duration: 600, ease: 'easeOut' }
+    }">
       <h1 class="text-4xl font-bold">These are the<br />technologies I’ve been using</h1>
     </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 col-span-4">
-      <ListTechCard v-for="(tech, index) in techList" :key="index" :title="tech.title" :skills="tech.skills" />
+      <ListTechCard v-for="(tech, index) in techList" :key="index" v-motion :initial="{ opacity: 0, y: 30 }"
+        :visible-once="{
+          opacity: 1,
+          y: 0,
+          transition: {
+            delay: index * 100,
+            duration: 600,
+            ease: [0.16, 1, 0.3, 1]
+          }
+        }" :title="tech.title" :skills="tech.skills" />
     </div>
   </div>
 </template>
+
 <script setup lang="ts">
 import type { ListTechCardProps } from '~/types/ListTechCardProps';
 
@@ -36,7 +51,7 @@ const techList: ListTechCardProps[] = [
     skills: [
       { name: "C#", image: "https://raw.githubusercontent.com/CodeByAllan/CodeByAllan/refs/heads/master/images/csharp.svg" },
       { name: "JavaScript", image: "https://raw.githubusercontent.com/CodeByAllan/CodeByAllan/refs/heads/master/images/js.svg" },
-      { name: "TypeScript", image: "https://raw.githubusercontent.com/CodeByAllan/CodeByAllan /refs/heads/master/images/typescript.svg" }
+      { name: "TypeScript", image: "https://raw.githubusercontent.com/CodeByAllan/CodeByAllan/refs/heads/master/images/typescript.svg" }
     ]
   },
   {

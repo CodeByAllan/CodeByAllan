@@ -1,11 +1,25 @@
 <template>
-  <h1 class="font-black text-6xl tracking-tight pb-6">
-    My Works
-  </h1>
-  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4">
-    <ProjectCard v-for="project in projects" :key="project.id" :title="project.title" :description="project.description"
-      :imageUrl="project.imageUrl" :projectUrl="project.projectUrl" :tags="project.tags" class="mb-6"
-      :demo-url="project.demoUrl" />
+  <div>
+    <h1 v-motion :initial="{ opacity: 0, y: 30 }" :visible-once="{
+      opacity: 1,
+      y: 0,
+      transition: { duration: 800, ease: [0.16, 1, 0.3, 1] }
+    }" class="font-black text-6xl tracking-tight pb-6">
+      My Works
+    </h1>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 pt-4">
+      <ProjectCard v-for="(project, index) in projects" :key="project.id" v-motion :initial="{ opacity: 0, y: 40 }"
+        :visible-once="{
+          opacity: 1,
+          y: 0,
+          transition: {
+            delay: (index % 3) * 150 + (Math.floor(index / 3) * 100),
+            ease: 'easeOut'
+          }
+        }" :title="project.title" :description="project.description" :imageUrl="project.imageUrl"
+        :projectUrl="project.projectUrl" :tags="project.tags" class="mb-6" :demo-url="project.demoUrl" />
+    </div>
   </div>
 </template>
 <script setup lang="ts">
